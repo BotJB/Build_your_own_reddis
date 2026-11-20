@@ -5,7 +5,7 @@ public class CommandParser {
 
 
         switch(commands[0]){
-            case "PING": return "+PONG\\r\\n";
+            case "PING": return "+PONG\r\n";
             default:return "Error unknown command ";
         }
     }
