@@ -7,6 +7,7 @@ public class RespParser {
 public String[] parseRespCommand(BufferedReader reader) throws IOException {
 
     String numberOfArgs= reader.readLine();
+    if(numberOfArgs==null) return null;
     int totoalNumberofArgsInt=Integer.parseInt(numberOfArgs.substring(1));
     //Array to hold the final arguments
     String[] argumentsToReturn=new String[totoalNumberofArgsInt];

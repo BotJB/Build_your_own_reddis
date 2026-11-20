@@ -4,6 +4,7 @@ import main.RespParser;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class ClientHandler {
     private final Socket clientSocket;
@@ -26,11 +27,18 @@ public class ClientHandler {
         )){
             //to write the response back to the client
             PrintWriter writer=new PrintWriter(clientSocket.getOutputStream(),true);
-               String[] commands=respParser.parseRespCommand(reader);
-               String reponse=parser.processCommand(commands);
-               writer.print(reponse);
-               writer.flush();
-
+            while(true) {
+                String[] commands = respParser.parseRespCommand(reader);
+                if (commands == null) {
+                    return;
+                }
+                System.out.println(
+                        "Parsed: " + Arrays.toString(commands)
+                );
+                String reponse = parser.processCommand(commands);
+                writer.print(reponse);
+                writer.flush();
+            }
 
 
         }
