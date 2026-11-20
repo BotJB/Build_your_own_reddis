@@ -13,11 +13,13 @@ public class RedisServer {
 
     public void start(){
         try(ServerSocket serverSocket=new ServerSocket(portNumber)){
+            System.out.println("We are in the redis Server class");
             serverSocket.setReuseAddress(true);
-            Socket socket=serverSocket.accept();
-            ClientHandler handler=new ClientHandler(socket);
-            handler.handle();
-
+            while(true) {
+                Socket socket = serverSocket.accept();
+                ClientHandler handler = new ClientHandler(socket);
+                handler.handle();
+            }
 
         }
         catch(Exception e ){
