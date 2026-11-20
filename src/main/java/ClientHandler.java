@@ -28,7 +28,8 @@ public class ClientHandler {
             PrintWriter writer=new PrintWriter(clientSocket.getOutputStream(),true);
                String[] commands=respParser.parseRespCommand(reader);
                String reponse=parser.processCommand(commands);
-               writer.println(reponse);
+               writer.print(reponse);
+               writer.flush();
 
 
 
