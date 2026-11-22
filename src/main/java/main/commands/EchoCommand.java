@@ -8,6 +8,7 @@ public class EchoCommand implements IRedisCommands{
         }
         String valueToReturn=commandsAndArguments[1].trim();
         return "$"
+                +commandsAndArguments.length
                +"\r\n"
                 + valueToReturn
                 +"\r\n";
