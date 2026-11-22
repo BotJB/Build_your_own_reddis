@@ -49,7 +49,7 @@ public class ClientHandler {
 
         }
         catch(Exception e ){
-            System.out.println("The error is "+ e.getMessage());
+            e.printStackTrace();
         }
     }
 }

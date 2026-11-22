@@ -1,5 +1,6 @@
 package main;
 
+import main.commands.EchoCommand;
 import main.commands.IRedisCommands;
 import main.commands.PingCommand;
 
@@ -12,5 +13,6 @@ public class CommandResgistry {
     public CommandResgistry(){
         commands=new HashMap<>();
         commands.put("PING", new PingCommand());
+        commands.put("ECHO",new EchoCommand());
     }
 }
