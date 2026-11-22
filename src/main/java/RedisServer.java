@@ -1,6 +1,8 @@
+import main.CommandResgistry;
+import main.handlers.ClientHandler;
+
 import java.net.ServerSocket;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,9 +11,11 @@ public class RedisServer {
 
     private final int portNumber;
     private final int maxThreads;
+    private final CommandResgistry registry;
     public RedisServer(int portNumber,int maxThreads){
         this.portNumber=portNumber;
         this.maxThreads=maxThreads;
+        registry=new CommandResgistry();
     }
     //The method to start the Redis
 
@@ -29,7 +33,7 @@ public class RedisServer {
             while(true) {
                 Socket socket = serverSocket.accept();
                 executorService.execute(()->{
-                    ClientHandler handler = new ClientHandler(socket);
+                    ClientHandler handler = new ClientHandler(socket,registry);
                     handler.handle();
                 });
             }
