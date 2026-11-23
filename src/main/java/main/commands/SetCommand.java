@@ -13,6 +13,6 @@ public class SetCommand implements IRedisCommands {
             return "-Err not suitbale number of args";
         }
         store.setValue(commandsAndArguments[1],commandsAndArguments[2]);
-        return "+OK\\r\\n";
+        return "+OK\r\n";
     }
 }
