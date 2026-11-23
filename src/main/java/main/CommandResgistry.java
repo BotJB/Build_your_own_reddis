@@ -1,9 +1,6 @@
 package main;
 
-import main.commands.EchoCommand;
-import main.commands.IRedisCommands;
-import main.commands.PingCommand;
-import main.commands.SetCommand;
+import main.commands.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +14,7 @@ public class CommandResgistry {
         commands.put("PING", new PingCommand());
         commands.put("ECHO",new EchoCommand());
         commands.put("SET",new SetCommand(store));
+        commands.put("GET",new GetCommand(store));
 
     }
 }
