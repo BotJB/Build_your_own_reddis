@@ -1,5 +1,7 @@
 package main.commands;
 
+import main.RedisStore;
+
 public class EchoCommand implements IRedisCommands{
     @Override
     public String execute(String[] commandsAndArguments) {

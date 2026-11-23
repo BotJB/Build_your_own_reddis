@@ -1,6 +1,7 @@
 package main.parsers;
 
 import main.CommandResgistry;
+import main.RedisStore;
 import main.commands.IRedisCommands;
 
 public class CommandParser {

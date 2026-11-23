@@ -1,3 +1,5 @@
+package main;
+
 import main.CommandResgistry;
 import main.handlers.ClientHandler;
 
@@ -12,13 +14,15 @@ public class RedisServer {
     private final int portNumber;
     private final int maxThreads;
     private final CommandResgistry registry;
-    public RedisServer(int portNumber,int maxThreads){
+
+
+    public RedisServer(int portNumber, int maxThreads, CommandResgistry registry){
         this.portNumber=portNumber;
         this.maxThreads=maxThreads;
-        registry=new CommandResgistry();
+        this.registry=registry;
     }
-    //The method to start the Redis
 
+    //The method to start the Redis
     public void start(){
         //Instantiating multiples thread to handle concurrency
         final ExecutorService executorService= Executors.newFixedThreadPool(maxThreads);
