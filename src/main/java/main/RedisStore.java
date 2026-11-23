@@ -56,12 +56,12 @@ public class RedisStore {
         ReddisEntry entry = store.get(key);
 
         if (entry == null) {
-            return "$-1\r\n";
+            return null;
         }
 
         if (entry.isExpired()) {
             store.remove(key);
-            return "$-1\r\n";
+            return null;
         }
 
         String value = entry.getValue();
