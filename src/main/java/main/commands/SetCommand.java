@@ -14,7 +14,7 @@ public class SetCommand implements IRedisCommands {
             return "-Err not suitbale number of args";
         }
         long timeToExpireCalcualted=-1;
-        if(commandsAndArguments.length>2){
+        if(commandsAndArguments.length==5){
             timeToExpireCalcualted=Long.parseLong(commandsAndArguments[4]);
         switch(commandsAndArguments[3]){
             case "EX":timeToExpireCalcualted*=1000;
