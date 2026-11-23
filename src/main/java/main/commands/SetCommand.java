@@ -10,7 +10,9 @@ public class SetCommand implements IRedisCommands {
     }
     @Override
     public String execute(String[] commandsAndArguments) {
-        long timeToExpireCalcualted=Long.parseLong(commandsAndArguments[4]);
+        long timeToExpireCalcualted=-1;
+        if(commandsAndArguments.length>2){
+            timeToExpireCalcualted=Long.parseLong(commandsAndArguments[4]);}
         if(commandsAndArguments.length!=3&&commandsAndArguments.length!=5){
             return "-Err not suitbale number of args";
         }
