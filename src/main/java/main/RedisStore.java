@@ -66,10 +66,6 @@ public class RedisStore {
 
         String value = entry.getValue();
 
-        return "$"
-                + value.length()
-                + "\r\n"
-                + value
-                + "\r\n";
+        return value;
     }
 }
