@@ -9,14 +9,21 @@ public class GetCommand implements IRedisCommands{
     }
     @Override
     public String execute(String[] commandsAndArguments) {
-        if(commandsAndArguments.length!=2){
-            return "-Err not suitbale number of args";
+
+        if (commandsAndArguments.length != 2) {
+            return "-ERR wrong number of arguments\r\n";
+        }
+
+        String value = store.getValue(commandsAndArguments[1]);
+
+        if (value == null) {
+            return "$-1\r\n";
         }
 
         return "$"
-                +store.getValue(commandsAndArguments[1]).length()
-                +"\r\n"
-                +store.getValue(commandsAndArguments[1])
-                +"\r\n";
+                + value.length()
+                + "\r\n"
+                + value
+                + "\r\n";
     }
 }
