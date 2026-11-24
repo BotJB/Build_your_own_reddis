@@ -23,7 +23,8 @@ public class GetCommand implements IRedisCommands{
         }
 
         if(value instanceof StringValue v){
-            return v.getSize()
+            return  "$"
+                    +v.getSize()
                     + "\r\n"
                     + v.getValue()
                     + "\r\n";
