@@ -1,6 +1,7 @@
 package main.commands;
 
 import main.RedisStore;
+import main.redis.IRedisValue;
 
 public class GetCommand implements IRedisCommands{
     private final RedisStore store;
@@ -14,14 +15,14 @@ public class GetCommand implements IRedisCommands{
             return "-ERR wrong number of arguments\r\n";
         }
 
-        String value = store.getValue(commandsAndArguments[1]);
+        IRedisValue value = store.getValue(commandsAndArguments[1]);
 
         if (value == null) {
             return "$-1\r\n";
         }
 
         return "$"
-                + value.length()
+                + value.getSize()
                 + "\r\n"
                 + value
                 + "\r\n";

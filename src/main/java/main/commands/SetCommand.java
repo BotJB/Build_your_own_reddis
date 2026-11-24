@@ -22,7 +22,7 @@ public class SetCommand implements IRedisCommands {
             case "PX":
                 break;
         }}
-        store.setValue(commandsAndArguments[1],commandsAndArguments[2],timeToExpireCalcualted);
+        store.setValueString(commandsAndArguments[1],commandsAndArguments[2],timeToExpireCalcualted);
         return "+OK\r\n";
     }
 }
