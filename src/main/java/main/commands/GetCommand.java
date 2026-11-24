@@ -2,6 +2,7 @@ package main.commands;
 
 import main.RedisStore;
 import main.redis.IRedisValue;
+import main.redis.StringValue;
 
 public class GetCommand implements IRedisCommands{
     private final RedisStore store;
@@ -21,10 +22,13 @@ public class GetCommand implements IRedisCommands{
             return "$-1\r\n";
         }
 
-        return "$"
-                + value.getSize()
-                + "\r\n"
-                + value
-                + "\r\n";
+        if(value instanceof StringValue v){
+            return v.getSize()
+                    + "\r\n"
+                    + v.getValue()
+                    + "\r\n";
+        }
+
+        throw new IllegalArgumentException();
     }
 }
