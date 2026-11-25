@@ -67,7 +67,7 @@ public class RedisStore {
         }
 
         if (entry.isExpired()) {
-            store.remove(key);
+            store.remove(key,entry);
             return null;
         }
 
@@ -80,7 +80,7 @@ public class RedisStore {
         final int[] newSize=new int[1];
     //check if the value is already present
         store.compute(key,(k,v)->{
-           if(v==null){
+           if(v==null||v.isExpired()){
                ListValue listValue=new ListValue();
                newSize[0]=listValue.rpushListValues(values);
                return new ReddisEntry(listValue,-1);
@@ -93,6 +93,17 @@ public class RedisStore {
         });
         return newSize[0];
     }
+
+   public List<String> lrange(String listName,int start,int end){
+       IRedisValue list=getValue(listName);
+       if(list==null){
+           return List.of();
+       }
+       if(list instanceof ListValue listValues){
+          return listValues.getRange(start,end);
+       }
+       throw new IllegalStateException("WRONG type of list");
+   }
 
 
 }
