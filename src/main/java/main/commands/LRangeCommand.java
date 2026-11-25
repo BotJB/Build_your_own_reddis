@@ -23,7 +23,7 @@ public class LRangeCommand implements IRedisCommands{
                    );
            for(String stringToApp:response){
                builder.append("$"+stringToApp.length()+"\r\n");
-               builder.append("$"+stringToApp+"\r\n");
+               builder.append(stringToApp+"\r\n");
            }
            return builder.toString();
        }
