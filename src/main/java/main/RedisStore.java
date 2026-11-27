@@ -19,6 +19,7 @@ public class RedisStore {
             this.value=value;
             this.timeToExpire=timeToExpire;
         }
+        public ReddisEntry(){}
        public boolean isExpired(){
             return timeToExpire!=-1&&System.currentTimeMillis()-timeToExpire>0;
        }
@@ -118,5 +119,17 @@ public class RedisStore {
        throw new IllegalStateException("WRONG type of list");
    }
 
+  //Method to get the length of the list
 
+    public int listLength(String listname){
+        int[] size=new int[1];
+        store.compute(listname,(k,v)->{
+            if(v==null) return new ReddisEntry();
+            if(v.getValue() instanceof ListValue list){
+             size[0]=list.getSize();
+            }
+            return v;
+        });
+        return size[0];
+    }
 }
