@@ -17,6 +17,7 @@ public class CommandResgistry {
         commands.put("GET",new GetCommand(store));
         commands.put("RPUSH",new RPushCommand(store));
         commands.put("LRANGE",new LRangeCommand(store));
+        commands.put("LPUSH",new LPushCommand(store));
 
     }
 }

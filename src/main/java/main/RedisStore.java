@@ -76,23 +76,36 @@ public class RedisStore {
         return value;
     }
     //method to add the
-    public int rpush(String key, List<String> values){
+    public int listPushMethod(String key, List<String> values,String type){
         final int[] newSize=new int[1];
     //check if the value is already present
         store.compute(key,(k,v)->{
            if(v==null||v.isExpired()){
                ListValue listValue=new ListValue();
+               if(type.equals("RPUSH")){
                newSize[0]=listValue.rpushListValues(values);
                return new ReddisEntry(listValue,-1);
            }
-           if(v.getValue() instanceof ListValue list){
+               else if(type.equals("LPUSH")){
+                   newSize[0]=listValue.lpushListValues(values);
+                   return new ReddisEntry(listValue,-1);
+               }
+           }
+
+           if(v.getValue() instanceof ListValue list && type.equals("RPUSH")){
                newSize[0]=list.rpushListValues(values);
+               return v;
+           }
+           else if(v.getValue() instanceof ListValue list && type.equals("LPUSH")){
+               newSize[0]=list.lpushListValues(values);
                return v;
            }
           throw new IllegalStateException("WRONG type");
         });
         return newSize[0];
     }
+
+
 
    public List<String> lrange(String listName,int start,int end){
        IRedisValue list=getValue(listName);

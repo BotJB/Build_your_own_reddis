@@ -22,6 +22,13 @@ public class ListValue implements IRedisValue{
         return values.size();
     }
 
+    public synchronized int lpushListValues(List<String> valuesToBeAdded){
+        for(String s:valuesToBeAdded){
+            values.addFirst(s);
+        }
+        return values.size();
+    }
+
     public synchronized List<String> getRange(int begin,int end){
     int actualStart=sanitizeIndex(begin,getSize());
     int actualEnd=sanitizeIndex(end,getSize());

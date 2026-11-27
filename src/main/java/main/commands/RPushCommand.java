@@ -29,7 +29,7 @@ public class RPushCommand implements IRedisCommands{
                         )
                 ).toList();
 
-        int newSize = store.rpush(key, values);
+        int newSize = store.listPushMethod(key, values,"RPUSH");
 
         return ":" + newSize + "\r\n";
     }
